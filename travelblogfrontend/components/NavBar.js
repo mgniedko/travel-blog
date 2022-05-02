@@ -15,6 +15,9 @@ const NavBar = () => {
                     />
                 </Link>
             </div>
+            <div className="nav-item-container">
+                <p>XXXX</p>
+            </div>
         </nav>
     )
 }
