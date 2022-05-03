@@ -6,3 +6,4 @@ travelblogbackend/node_modules
 
 .idea
 *.impl
+.next
