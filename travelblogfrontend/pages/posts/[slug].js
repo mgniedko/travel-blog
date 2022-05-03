@@ -1,11 +1,62 @@
 import groq from 'groq';
 import {PortableText} from "@portabletext/react";
 import {getClient} from "../../lib/sanity.server";
+import Tag from "../../components/Tag";
+import {urlFor} from "../../lib/sanity";
 
 const Post = ({post}) => {
+    const {title, categories, body, authorImage, username, about, postedAt} = post;
+
+    const PostComponents = {
+        types: {
+            image: ({value}) => {
+                return (
+                  <img
+                    className="post-image"
+                    alt={value.alt || ' '}
+                    src={urlFor(value)}
+                  />
+                );
+            }
+        }
+    }
+
     return (
         <div>
+            {post && <article className="post-container">
+                <h1>{title}</h1>
+                <hr/>
+                <div className="tag-container">
+                    {categories?.map((category) => (
+                        <>
+                        {category &&
+                                <Tag key={category.id} title={category.title}/> }
+                        </>
+                    ))}
+                </div>
 
+                <PortableText value={body} components={PostComponents}/>
+
+                <hr/>
+
+                <div className="info-container">
+                    <div className="author-container">
+                        <img
+                            className="avatar"
+                            src={urlFor(authorImage).url()}
+                            alt={username + 'avatar'}
+                        />
+
+                        <h3>Author: <strong>{username}</strong></h3>
+
+                        <p>About Author</p>
+
+                        <PortableText value={body} components={PostComponents}/>
+
+                        <hr/>
+                    </div>
+                </div>
+            </article> }
         </div>
     )
 }
