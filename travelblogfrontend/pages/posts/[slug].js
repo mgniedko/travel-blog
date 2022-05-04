@@ -3,6 +3,7 @@ import {PortableText} from "@portabletext/react";
 import {getClient} from "../../lib/sanity.server";
 import Tag from "../../components/Tag";
 import {urlFor} from "../../lib/sanity";
+import Map from "../../components/Map";
 
 const Post = ({post}) => {
     const {title, categories, body, authorImage, username, about, postedAt} = post;
@@ -51,9 +52,13 @@ const Post = ({post}) => {
 
                         <p>About Author</p>
 
-                        <PortableText value={body} components={PostComponents}/>
+                        <p>{about}</p>
 
                         <hr/>
+                    </div>
+
+                    <div className="map-container">
+                        <Map longitude={postedAt.lng} latitude={postedAt.lat}/>
                     </div>
                 </div>
             </article> }

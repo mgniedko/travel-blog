@@ -16,7 +16,9 @@ const Home = ({posts}) => {
           {posts?.map((post) => (
               <Link
                 key={post.id}
-                href="/"
+                href="/posts/[slug]"
+                as={`/posts/${post.slug.current}`}
+                passHref
               >
                   <Card post={post}/>
               </Link>
