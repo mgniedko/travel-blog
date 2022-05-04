@@ -1,12 +1,13 @@
 import {createClient} from 'next-sanity';
 import {config} from './config'
+import {process} from "next/dist/server/web/sandbox/polyfills";
 
 export const sanityClient = createClient(config);
 
 export const previewClient = createClient({
     ...config,
     useCdn: false,
-    token: 'sk8aQ3Yeob9hGuSPW37aseWN5dll5OXxYYyEDaHZjX16ZTnbOavkNc6vXMcyDXPQnNWXXoFqGlOTkh0L1gTnX9yPihHzQVUUZFQ1s2mgUtKZeyDlYauKAnHNEeACTFYW4bOwqGkwtTmMigyRWx43YYCsrt1LXz0RpAvPNsDoF8VuH9e4i3hW'
+    token: process.env.NEXT_PUBLIC_SANITY_TOKEN
 });
 
 export const getClient = (usePreview) => usePreview ? previewClient : sanityClient;
