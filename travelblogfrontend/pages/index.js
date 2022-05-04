@@ -28,7 +28,7 @@ const Home = ({posts}) => {
   )
 }
 
-export async function getStaticProps({preview = false}) {
+export const getStaticProps = async ({preview = false}) => {
     const posts = await getClient(preview).fetch(groq`
         *[_type == "post" && publishedAt < now()] | order(publishedAt desc) {
             _id,
